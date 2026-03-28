@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('room_id')->nullable()->constrained('rooms')->nullOnDelete();
             $table->timestamps();
 
-            $table->unique(['cohort_id', 'day_of_week', 'start_time', 'end_time']);
+            $table->unique(['cohort_id', 'day_of_week', 'start_time', 'end_time'], 'cws_unique_schedule');
         });
     }
 
