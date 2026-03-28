@@ -13,12 +13,21 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('first_name', 100);
+            $table->string('last_name', 100);
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('phone', 30)->unique();
             $table->string('password');
+            //$table->unsignedBigInteger('avatar_media_id')->nullable(); add Later when media table is created
+            $table->text('bio')->nullable();
+            $table->string('city', 120)->nullable();
+            $table->string('status')->default('active');
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->index('status');
+            //$table->index('avatar_media_id');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
