@@ -17,6 +17,19 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'phone',
+        'password',
+        'avatar_media_id',
+        'bio',
+        'city',
+        'status',
+        'email_verified_at',
+    ];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -144,5 +157,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(PointTransaction::class, 'user_id');
     }
+
+    public function supportConversations() { return $this->hasMany(SupportConversation::class, 'student_id'); }
+    public function assignedSupportConversations() { return $this->hasMany(SupportConversation::class, 'assigned_to'); }
+    public function supportMessages() { return $this->hasMany(SupportMessage::class, 'sender_id'); }
+    public function handledContactRequests() { return $this->hasMany(ContactRequest::class, 'handled_by'); }
+
 
 }
