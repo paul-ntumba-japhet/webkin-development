@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('enrollment_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('assigned_to')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('assigned_to_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('subject');
             $table->string('category', 50)->nullable();
             $table->string('status', 30)->default('open');

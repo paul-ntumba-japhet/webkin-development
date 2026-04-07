@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Cohort extends Model
 {
@@ -19,11 +21,11 @@ class Cohort extends Model
         'notes',
     ];
 
-    public function program() { return $this->belongsTo(Program::class); }
-    public function weeklySchedules() { return $this->hasMany(CohortWeeklySchedule::class); }
-    public function schedules() { return $this->hasMany(CohortSchedule::class); }
-    public function enrollments() { return $this->hasMany(Enrollment::class); }
-    public function assignments() { return $this->hasMany(Assignment::class); }
-    public function studentProjects() { return $this->hasMany(StudentProject::class); }
+    public function program() : BelongsTo { return $this->belongsTo(Program::class); }
+    public function weeklySchedules() : HasMany { return $this->hasMany(CohortWeeklySchedule::class); }
+    public function schedules() : HasMany { return $this->hasMany(CohortSchedule::class); }
+    public function enrollments() : HasMany { return $this->hasMany(Enrollment::class); }
+    public function assignments() : HasMany { return $this->hasMany(Assignment::class); }
+    public function studentProjects() : HasMany { return $this->hasMany(StudentProject::class); }
 
 }

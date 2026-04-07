@@ -20,7 +20,7 @@ return new class extends Migration
             $table->longText('message');
             $table->string('source', 100)->nullable();
             $table->string('status', 30)->default('new');
-            $table->foreignId('handled_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('handled_by_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('handled_at')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();

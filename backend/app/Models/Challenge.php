@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Challenge extends Model
 {
@@ -22,7 +24,7 @@ class Challenge extends Model
         'published_at',
     ];
 
-    public function submissions() { return $this->hasMany(ChallengeSubmission::class); }
-    public function pointTransactions() { return $this->morphMany(PointTransaction::class, 'source'); }
+    public function submissions() : HasMany { return $this->hasMany(ChallengeSubmission::class); }
+    public function pointTransactions() : MorphMany { return $this->morphMany(PointTransaction::class, 'source'); }
 
 }

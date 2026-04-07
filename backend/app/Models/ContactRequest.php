@@ -16,7 +16,7 @@ class ContactRequest extends Model
         'message',
         'source',
         'status',
-        'handled_by',
+        'handled_by_user_id',
         'handled_at',
         'notes',
     ];

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Assignment extends Model
 {
@@ -23,11 +25,11 @@ class Assignment extends Model
         'created_by',
     ];
 
-    public function program() { return $this->belongsTo(Program::class); }
-    public function module() { return $this->belongsTo(ProgramModule::class, 'module_id'); }
-    public function lesson() { return $this->belongsTo(Lesson::class); }
-    public function cohort() { return $this->belongsTo(Cohort::class); }
-    public function creator() { return $this->belongsTo(User::class, 'created_by'); }
-    public function submissions() { return $this->hasMany(AssignmentSubmission::class); }
+    public function program() : BelongsTo { return $this->belongsTo(Program::class); }
+    public function module() : BelongsTo { return $this->belongsTo(ProgramModule::class, 'module_id'); }
+    public function lesson() : BelongsTo { return $this->belongsTo(Lesson::class); }
+    public function cohort() : BelongsTo { return $this->belongsTo(Cohort::class); }
+    public function creator() : BelongsTo { return $this->belongsTo(User::class, 'created_by'); }
+    public function submissions() : HasMany { return $this->hasMany(AssignmentSubmission::class); }
 
 }

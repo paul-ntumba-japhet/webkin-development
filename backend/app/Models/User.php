@@ -3,14 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-#[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -43,125 +43,125 @@ class User extends Authenticatable
         ];
     }
 
-    public function avatarMedia()
+    public function avatarMedia() : BelongsTo
     {
         return $this->belongsTo(Media::class, 'avatar_media_id');
     }
 
 
-    public function roles()
+    public function roles() : BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'user_roles')->withTimestamps()->withPivot('assigned_at');
     }
 
 
-    public function uploadedMedia()
+    public function uploadedMedia() : HasMany
     {
         return $this->hasMany(Media::class, 'uploaded_by');
     }
 
 
-    public function taughtSchedules()
+    public function taughtSchedules() : HasMany
     {
         return $this->hasMany(CohortSchedule::class, 'instructor_id');
     }
 
-    public function enrollments()
+    public function enrollments() : HasMany
     {
         return $this->hasMany(Enrollment::class, 'student_id');
     }
 
 
-    public function validatedEnrollments()
+    public function validatedEnrollments() : HasMany
     {
         return $this->hasMany(Enrollment::class, 'validated_by');
     }
 
-    public function initiatedPayments()
+    public function initiatedPayments() : HasMany
     {
         return $this->hasMany(PaymentTransaction::class, 'initiated_by_user_id');
     }
 
-    public function recordedPayments()
+    public function recordedPayments() : HasMany
     {
         return $this->hasMany(PaymentTransaction::class, 'recorded_by_admin_id');
     }
 
-    public function assignmentSubmissions()
+    public function assignmentSubmissions() : HasMany
     {
         return $this->hasMany(AssignmentSubmission::class, 'student_id');
     }
 
-    public function assignmentReviews()
+    public function assignmentReviews() : HasMany
     {
         return $this->hasMany(AssignmentReview::class, 'reviewer_id');
     }
 
 
-    public function studentProjects()
+    public function studentProjects() : HasMany
     {
         return $this->hasMany(StudentProject::class, 'student_id');
     }
 
 
-    public function projectMemberships()
+    public function projectMemberships() : HasMany
     {
         return $this->hasMany(ProjectMember::class, 'user_id');
     }
 
-    public function mentoredSessions()
+    public function mentoredSessions() : HasMany
     {
         return $this->hasMany(MentorshipSession::class, 'mentor_id');
     }
 
-    public function mentoringSessionsAsStudent()
+    public function mentoringSessionsAsStudent() : HasMany
     {
         return $this->hasMany(MentorshipSession::class, 'student_id');
     }
 
-    public function studentQuestions()
+    public function studentQuestions() : HasMany
     {
         return $this->hasMany(StudentQuestion::class, 'student_id');
     }
 
 
-    public function questionAnswers()
+    public function questionAnswers() : HasMany
     {
         return $this->hasMany(QuestionAnswer::class, 'author_id');
     }
 
 
-    public function testimonials()
+    public function testimonials() : HasMany
     {
         return $this->hasMany(Testimonial::class, 'student_id');
     }
 
 
 
-    public function notifications()
+    public function notifications() : HasMany
     {
         return $this->hasMany(Notification::class, 'user_id');
     }
 
-    public function challengeSubmissions()
+    public function challengeSubmissions() : HasMany
     {
         return $this->hasMany(ChallengeSubmission::class, 'student_id');
     }
 
-    public function reviewedChallengeSubmissions()
+    public function reviewedChallengeSubmissions() : HasMany
     {
         return $this->hasMany(ChallengeSubmission::class, 'reviewed_by');
     }
 
-    public function pointTransactions()
+    public function pointTransactions() : HasMany
     {
         return $this->hasMany(PointTransaction::class, 'user_id');
     }
 
-    public function supportConversations() { return $this->hasMany(SupportConversation::class, 'student_id'); }
-    public function assignedSupportConversations() { return $this->hasMany(SupportConversation::class, 'assigned_to'); }
-    public function supportMessages() { return $this->hasMany(SupportMessage::class, 'sender_id'); }
-    public function handledContactRequests() { return $this->hasMany(ContactRequest::class, 'handled_by'); }
+    public function supportConversations() : HasMany { return $this->hasMany(SupportConversation::class, 'student_id'); }
+    public function assignedSupportConversations() : HasMany { return $this->hasMany(SupportConversation::class, 'assigned_to'); }
+    public function supportMessages() : HasMany { return $this->hasMany(SupportMessage::class, 'sender_id'); }
+    public function handledContactRequests() : HasMany { return $this->hasMany(ContactRequest::class, 'handled_by'); }
 
 
 }

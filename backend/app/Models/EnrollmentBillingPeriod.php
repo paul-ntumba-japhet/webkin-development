@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EnrollmentBillingPeriod extends Model
 {
@@ -23,6 +25,6 @@ class EnrollmentBillingPeriod extends Model
         'is_initial_payment',
     ];
 
-    public function enrollment() { return $this->belongsTo(Enrollment::class); }
-    public function payments() { return $this->hasMany(PaymentTransaction::class, 'billing_period_id'); }
+    public function enrollment() : BelongsTo { return $this->belongsTo(Enrollment::class); }
+    public function payments() : HasMany { return $this->hasMany(PaymentTransaction::class, 'billing_period_id'); }
 }

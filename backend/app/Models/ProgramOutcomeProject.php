@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProgramOutcomeProject extends Model
 {
@@ -23,6 +24,6 @@ class ProgramOutcomeProject extends Model
         'is_featured',
         'status',
     ];
-    public function program() { return $this->belongsTo(Program::class); }
-    public function thumbnailMedia() { return $this->belongsTo(Media::class, 'thumbnail_media_id'); }
+    public function program() : BelongsTo { return $this->belongsTo(Program::class); }
+    public function thumbnailMedia() : BelongsTo { return $this->belongsTo(Media::class, 'thumbnail_media_id'); }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class QuestionAnswer extends Model
 {
@@ -15,7 +16,7 @@ class QuestionAnswer extends Model
         'is_accepted',
     ];
 
-    public function question() { return $this->belongsTo(StudentQuestion::class, 'question_id'); }
-    public function author() { return $this->belongsTo(User::class, 'author_id'); }
+    public function question() : BelongsTo { return $this->belongsTo(StudentQuestion::class, 'question_id'); }
+    public function author() : BelongsTo { return $this->belongsTo(User::class, 'author_id'); }
 
 }

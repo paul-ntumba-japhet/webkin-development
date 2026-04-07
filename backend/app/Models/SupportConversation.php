@@ -11,7 +11,7 @@ class SupportConversation extends Model
     protected $fillable = [
         'student_id',
         'enrollment_id',
-        'assigned_to',
+        'assigned_to_user_id',
         'subject',
         'category',
         'status',

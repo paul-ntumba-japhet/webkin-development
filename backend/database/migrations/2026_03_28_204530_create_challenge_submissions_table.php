@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('score', 8, 2)->nullable();
             $table->longText('feedback')->nullable();
             $table->timestamp('submitted_at')->nullable();
-            $table->foreignId('reviewed_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('reviewed_by_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('reviewed_at')->nullable();
             $table->string('status', 30)->default('submitted');
             $table->timestamps();

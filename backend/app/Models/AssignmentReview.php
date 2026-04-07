@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AssignmentReview extends Model
 {
@@ -17,7 +18,7 @@ class AssignmentReview extends Model
         'reviewed_at',
     ];
 
-    public function submission() { return $this->belongsTo(AssignmentSubmission::class, 'submission_id'); }
-    public function reviewer() { return $this->belongsTo(User::class, 'reviewer_id'); }
+    public function submission() : BelongsTo { return $this->belongsTo(AssignmentSubmission::class, 'submission_id'); }
+    public function reviewer() : BelongsTo { return $this->belongsTo(User::class, 'reviewer_id'); }
 
 }

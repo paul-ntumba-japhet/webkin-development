@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('status', 30)->default('pending_payment');
             $table->string('payment_status', 30)->default('unpaid');
             $table->timestamp('validated_at')->nullable();
-            $table->foreignId('validated_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('validated_by_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->text('notes')->nullable();
             $table->timestamps();
 

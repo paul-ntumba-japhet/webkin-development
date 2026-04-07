@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProgramShowcase extends Model
 {
@@ -22,8 +24,8 @@ class ProgramShowcase extends Model
         'status',
     ];
 
-    public function program() { return $this->belongsTo(Program::class); }
-    public function media() { return $this->belongsTo(Media::class); }
-    public function thumbnailMedia() { return $this->belongsTo(Media::class, 'thumbnail_media_id'); }
+    public function program() : BelongsTo { return $this->belongsTo(Program::class); }
+    public function media() : BelongsTo { return $this->belongsTo(Media::class); }
+    public function thumbnailMedia() : BelongsTo { return $this->belongsTo(Media::class, 'thumbnail_media_id'); }
 
 }

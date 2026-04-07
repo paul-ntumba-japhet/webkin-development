@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProgramResource extends Model
 {
@@ -21,7 +22,7 @@ class ProgramResource extends Model
         'status',
     ];
 
-    public function program() { return $this->belongsTo(Program::class); }
-    public function media() { return $this->belongsTo(Media::class); }
+    public function program() : BelongsTo { return $this->belongsTo(Program::class); }
+    public function media() : BelongsTo { return $this->belongsTo(Media::class); }
 
 }

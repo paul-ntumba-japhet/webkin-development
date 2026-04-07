@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Invoice extends Model
 {
@@ -16,5 +17,5 @@ class Invoice extends Model
         'file_path',
     ];
 
-    public function paymentTransaction() { return $this->belongsTo(PaymentTransaction::class); }
+    public function paymentTransaction() : BelongsTo { return $this->belongsTo(PaymentTransaction::class); }
 }

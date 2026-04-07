@@ -17,7 +17,7 @@ class ChallengeSubmission extends Model
         'score',
         'feedback',
         'submitted_at',
-        'reviewed_by',
+        'reviewed_by_user_id',
         'reviewed_at',
         'status',
     ];

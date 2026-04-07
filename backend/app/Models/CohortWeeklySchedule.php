@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CohortWeeklySchedule extends Model
 {
@@ -17,17 +19,17 @@ class CohortWeeklySchedule extends Model
         'room_id',
     ];
 
-    public function cohort()
+    public function cohort() : BelongsTo
     {
         return $this->belongsTo(Cohort::class);
     }
 
-    public function room()
+    public function room() : BelongsTo
     {
         return $this->belongsTo(Room::class);
     }
 
-    public function schedules()
+    public function schedules() : HasMany
     {
         return $this->hasMany(CohortSchedule::class);
     }

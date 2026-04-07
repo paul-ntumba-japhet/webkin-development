@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserRole extends Model
 {
@@ -15,12 +16,12 @@ class UserRole extends Model
         'assigned_at',
     ];
 
-    public function user()
+    public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function role()
+    public function role() : BelongsTo
     {
         return $this->belongsTo(Role::class);
     }

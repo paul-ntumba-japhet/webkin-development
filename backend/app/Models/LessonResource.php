@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LessonResource extends Model
 {
@@ -17,7 +18,7 @@ class LessonResource extends Model
         'external_url',
     ];
 
-    public function lesson() { return $this->belongsTo(Lesson::class); }
-    public function media() { return $this->belongsTo(Media::class); }
+    public function lesson() : BelongsTo { return $this->belongsTo(Lesson::class); }
+    public function media() : BelongsTo { return $this->belongsTo(Media::class); }
 
 }

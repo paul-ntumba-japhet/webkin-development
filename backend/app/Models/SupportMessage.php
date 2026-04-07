@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SupportMessage extends Model
 {
@@ -17,8 +18,8 @@ class SupportMessage extends Model
         'read_at',
     ];
 
-    public function conversation() { return $this->belongsTo(SupportConversation::class, 'conversation_id'); }
-    public function sender() { return $this->belongsTo(User::class, 'sender_id'); }
-    public function attachmentMedia() { return $this->belongsTo(Media::class, 'attachment_media_id'); }
+    public function conversation() : BelongsTo { return $this->belongsTo(SupportConversation::class, 'conversation_id'); }
+    public function sender() : BelongsTo { return $this->belongsTo(User::class, 'sender_id'); }
+    public function attachmentMedia() : BelongsTo { return $this->belongsTo(Media::class, 'attachment_media_id'); }
 
 }

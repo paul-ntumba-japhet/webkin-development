@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MentorshipSession extends Model
 {
@@ -21,8 +22,8 @@ class MentorshipSession extends Model
         'notes',
     ];
 
-    public function mentor() { return $this->belongsTo(User::class, 'mentor_id'); }
-    public function student() { return $this->belongsTo(User::class, 'student_id'); }
-    public function enrollment() { return $this->belongsTo(Enrollment::class); }
+    public function mentor() : BelongsTo { return $this->belongsTo(User::class, 'mentor_id'); }
+    public function student() : BelongsTo { return $this->belongsTo(User::class, 'student_id'); }
+    public function enrollment() : BelongsTo { return $this->belongsTo(Enrollment::class); }
 
 }

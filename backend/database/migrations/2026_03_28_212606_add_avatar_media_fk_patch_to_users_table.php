@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('avatar_media_id')->references('id')->on('media')->nullOnDelete();
+            $table->foreignId('avatar_media_id')->after("email")->nullable()->references('id')->on('media')->nullOnDelete();
+
+            $table->index('avatar_media_id');
         });
     }
 
