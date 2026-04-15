@@ -18,6 +18,17 @@ class SupportMessage extends Model
         'read_at',
     ];
 
+    protected  function casts() : array
+    {
+        return [
+            'conversation_id' => 'integer',
+            'sender_id' => 'integer',
+            'attachment_media_id' => 'integer',
+            'is_internal' => 'boolean',
+            'read_at' => 'datetime',
+        ];
+    }
+
     public function conversation() : BelongsTo { return $this->belongsTo(SupportConversation::class, 'conversation_id'); }
     public function sender() : BelongsTo { return $this->belongsTo(User::class, 'sender_id'); }
     public function attachmentMedia() : BelongsTo { return $this->belongsTo(Media::class, 'attachment_media_id'); }

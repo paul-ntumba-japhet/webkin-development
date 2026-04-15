@@ -18,6 +18,14 @@ class ProgramModule extends Model
         'estimated_duration',
     ];
 
+    protected function casts() : array
+    {
+        return [
+            'program_id' => 'integer',
+            'position' => 'integer',
+        ];
+    }
+
     public function program() : BelongsTo { return $this->belongsTo(Program::class); }
     public function lessons() : HasMany { return $this->hasMany(Lesson::class, 'module_id'); }
     public function schedules() : HasMany { return $this->hasMany(CohortSchedule::class, 'module_id'); }

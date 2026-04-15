@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Domain\Programs\Enums\DurationUnit;
+use App\Domain\Programs\Enums\ProgramStatus;
 
 class Program extends Model
 {
@@ -24,6 +26,16 @@ class Program extends Model
         'is_featured',
         'cover_media_id',
     ];
+
+    protected function casts() : array
+    {
+        return [
+            'cover_media_id' => 'integer',
+            'is_featured' => 'boolean',
+            'status' => ProgramStatus::class,
+            'duration_unit' => DurationUnit::class,
+        ];
+    }
 
     public function coverMedia() : BelongsTo { return $this->belongsTo(Media::class, 'cover_media_id'); }
     public function objectives() : HasMany { return $this->hasMany(ProgramObjective::class); }

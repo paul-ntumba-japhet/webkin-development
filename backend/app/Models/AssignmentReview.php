@@ -18,6 +18,16 @@ class AssignmentReview extends Model
         'reviewed_at',
     ];
 
+    protected function casts() : array
+    {
+        return [
+            'submission_id' => 'integer',
+            'reviewer_id' => 'integer',
+            'score' => 'decimal:2',
+            'reviewed_at' => 'datetime',
+        ];
+    }
+
     public function submission() : BelongsTo { return $this->belongsTo(AssignmentSubmission::class, 'submission_id'); }
     public function reviewer() : BelongsTo { return $this->belongsTo(User::class, 'reviewer_id'); }
 

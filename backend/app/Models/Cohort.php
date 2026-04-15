@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Domain\Cohorts\Enums\CohortStatus;
 
 class Cohort extends Model
 {
@@ -20,6 +21,18 @@ class Cohort extends Model
         'status',
         'notes',
     ];
+
+    protected function casts() : array
+    {
+        return [
+            'program_id' => 'integer',
+            'start_date' => 'date',
+            'end_date' => 'date',
+            'max_students' => 'integer',
+            'price' => 'decimal:2',
+            'status' => CohortStatus::class,
+        ];
+    }
 
     public function program() : BelongsTo { return $this->belongsTo(Program::class); }
     public function weeklySchedules() : HasMany { return $this->hasMany(CohortWeeklySchedule::class); }

@@ -16,6 +16,15 @@ class QuestionAnswer extends Model
         'is_accepted',
     ];
 
+    protected function casts() : array
+    {
+        return [
+            'question_id' => 'integer',
+            'author_id' => 'integer',
+            'is_accepted' => 'boolean',
+        ];
+    }
+
     public function question() : BelongsTo { return $this->belongsTo(StudentQuestion::class, 'question_id'); }
     public function author() : BelongsTo { return $this->belongsTo(User::class, 'author_id'); }
 

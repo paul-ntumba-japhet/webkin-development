@@ -15,6 +15,15 @@ class Role extends Model
         'slug',
         'description',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'name' => 'string',
+            'slug' => 'string',
+            'description' => 'string',
+        ];
+    }
     public function users() : BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_roles')->withTimestamps()->withPivot('assigned_at');

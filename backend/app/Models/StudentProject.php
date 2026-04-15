@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Domain\Projects\Enums\StudentProjectStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,20 @@ class StudentProject extends Model
         'is_featured',
         'published_at',
     ];
+
+    protected function casts() : array
+    {
+        return [
+            'student_id' => 'integer',
+        'program_id' => 'integer',
+        'cohort_id' => 'integer',
+        'cover_media_id' => 'integer',
+        'is_featured' => 'boolean',
+        'published_at' => 'datetime',
+        'status' => StudentProjectStatus::class,
+
+        ];
+    }
 
     public function student() : BelongsTo { return $this->belongsTo(User::class, 'student_id'); }
     public function program() : BelongsTo { return $this->belongsTo(Program::class); }

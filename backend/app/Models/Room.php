@@ -16,6 +16,13 @@ class Room extends Model
         'description',
     ];
 
+    protected function casts() : array
+    {
+        return [
+            'capacity' => 'integer',
+        ];
+    }
+
     public function weeklySchedules() : HasMany { return $this->hasMany(CohortWeeklySchedule::class); }
     public function schedules() : HasMany { return $this->hasMany(CohortSchedule::class); }
 

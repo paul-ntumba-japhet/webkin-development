@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Domain\Users\Enums\UserStatus;
 
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
@@ -40,6 +41,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'avatar_media_id' => 'integer',
+            'status' => UserStatus::class,
         ];
     }
 

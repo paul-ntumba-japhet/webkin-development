@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Domain\Cohorts\Enums\CohortSessionStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -28,7 +29,16 @@ class CohortSchedule extends Model
     ];
 
     protected $casts = [
-        'scheduled_date' => 'date',
+        'cohort_id' => 'integer',
+        'module_id' => 'integer',
+        'lesson_id' => 'integer',
+        'instructor_id' => 'integer',
+        'room_id' => 'integer',
+        'session_date' => 'date',
+        'start_time' => 'datetime:H:i:s',
+        'end_time' => 'datetime:H:i:s',
+        'status' => CohortSessionStatus::class,
+        //'mode' => DeliveryMode::class,
     ];
 
     public function cohort() : BelongsTo

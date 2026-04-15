@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Domain\Media\Enums\MediaType;
 
 class Media extends Model
 {
@@ -23,6 +24,17 @@ class Media extends Model
         'type',
         'uploaded_by',
     ];
+
+    protected function casts() : array
+    {
+        return [
+            'size' => 'integer',
+            'uploaded_by' => 'integer',
+            'type' => MediaType::class,
+        ];
+    }
+
+
     public function uploader() : BelongsTo { return $this->belongsTo(User::class, 'uploaded_by'); }
     public function userAvatars() : HasMany { return $this->hasMany(User::class, 'avatar_media_id'); }
     public function programCovers() : HasMany { return $this->hasMany(Program::class, 'cover_media_id'); }

@@ -16,6 +16,15 @@ class UserRole extends Model
         'assigned_at',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'user_id' => 'integer',
+            'role_id' => 'integer',
+            'assigned_at' => 'datetime',
+        ];
+    }
+
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);

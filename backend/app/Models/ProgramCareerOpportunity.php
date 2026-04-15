@@ -16,5 +16,13 @@ class ProgramCareerOpportunity extends Model
         'description',
         'position',
     ];
+
+    protected function casts() : array
+    {
+        return [
+            'program_id' => 'integer',
+            'position' => 'integer',
+        ];
+    }
     public function program() : BelongsTo { return $this->belongsTo(Program::class); }
 }

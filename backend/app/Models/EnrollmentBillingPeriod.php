@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Domain\Enrollments\Enums\BillingPeriodStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class EnrollmentBillingPeriod extends Model
 {
@@ -24,6 +25,22 @@ class EnrollmentBillingPeriod extends Model
         'status',
         'is_initial_payment',
     ];
+
+    protected function casts() : array
+    {
+        return [
+           'enrollment_id' => 'integer',
+            'period_number' => 'integer',
+            'amount_due' => 'decimal:2',
+            'amount_paid' => 'decimal:2',
+            'balance_due' => 'decimal:2',
+            'period_start_date' => 'date',
+            'period_end_date' => 'date',
+            'due_date' => 'date',
+            'is_initial_payment' => 'boolean',
+            'status' => BillingPeriodStatus::class,
+        ];
+    }
 
     public function enrollment() : BelongsTo { return $this->belongsTo(Enrollment::class); }
     public function payments() : HasMany { return $this->hasMany(PaymentTransaction::class, 'billing_period_id'); }

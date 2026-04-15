@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Domain\Enrollments\Enums\EnrollmentPaymentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Domain\Enrollments\Enums\EnrollmentStatus;
+use App\Domain\Payments\Enums\PaymentStatus;
 
 class Enrollment extends Model
 {
@@ -21,6 +24,20 @@ class Enrollment extends Model
         'validated_by_user_id',
         'notes',
     ];
+
+    protected function casts() : array
+    {
+        return [
+            'student_id' => 'integer',
+            'program_id' => 'integer',
+            'cohort_id' => 'integer',
+            'enrollment_date' => 'date',
+            'status' => EnrollmentStatus::class,
+            'payment_status' => EnrollmentPaymentStatus::class,
+            'validated_at' => 'datetime',
+            'validated_by_user_id' => 'integer',
+        ];
+    }
 
     public function student() : BelongsTo { return $this->belongsTo(User::class, 'student_id'); }
     public function program() : BelongsTo { return $this->belongsTo(Program::class); }

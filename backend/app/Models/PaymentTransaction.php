@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use App\Domain\Payments\Enums\PaymentChannel;
+use App\Domain\Payments\Enums\PaymentMethod;
+use App\Domain\Payments\Enums\PaymentProvider;
+use App\Domain\Payments\Enums\PaymentTransactionStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 class PaymentTransaction extends Model
 {
     use HasFactory;
@@ -28,6 +33,24 @@ class PaymentTransaction extends Model
         'metadata',
         'notes',
     ];
+
+    protected function casts() : array
+    {
+        return [
+            'enrollment_id' => 'integer',
+            'billing_period_id' => 'integer',
+            'initiated_by_user_id' => 'integer',
+            'recorded_by_admin_id' => 'integer',
+            'amount' => 'decimal:2',
+            'metadata' => 'array',
+            'paid_at' => 'datetime',
+            'confirmed_at' => 'datetime',
+            'payment_method' => PaymentMethod::class,
+            'payment_channel' => PaymentChannel::class,
+            'provider' => PaymentProvider::class,
+            'status' => PaymentTransactionStatus::class,
+        ];
+    }
 
     public function enrollment() : BelongsTo { return $this->belongsTo(Enrollment::class); }
     public function billingPeriod() : BelongsTo { return $this->belongsTo(EnrollmentBillingPeriod::class, 'billing_period_id'); }

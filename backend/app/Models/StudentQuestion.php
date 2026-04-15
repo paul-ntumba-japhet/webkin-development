@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Domain\Communication\Enums\StudentQuestionStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,6 +19,16 @@ class StudentQuestion extends Model
         'question',
         'status',
     ];
+
+    protected function casts() : array
+    {
+        return [
+            'student_id' => 'integer',
+            'program_id' => 'integer',
+            'module_id' => 'integer',
+            'status' => StudentQuestionStatus::class,
+        ];
+    }
 
     public function student() : BelongsTo { return $this->belongsTo(User::class, 'student_id'); }
     public function program() : BelongsTo { return $this->belongsTo(Program::class); }

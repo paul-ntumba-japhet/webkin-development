@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Domain\Programs\Enums\LessonType;
+
 
 class Lesson extends Model
 {
@@ -22,6 +24,18 @@ class Lesson extends Model
         'position',
         'published_at',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'module_id' => 'integer',
+            'position' => 'integer',
+            'is_preview' => 'boolean',
+            'published_at' => 'datetime',
+            'lesson_type' => LessonType::class,
+        ];
+    }
+
 
     public function module() : BelongsTo { return $this->belongsTo(ProgramModule::class, 'module_id'); }
     public function resources() : HasMany { return $this->hasMany(LessonResource::class); }

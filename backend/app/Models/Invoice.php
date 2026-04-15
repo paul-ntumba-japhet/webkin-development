@@ -17,5 +17,14 @@ class Invoice extends Model
         'file_path',
     ];
 
+    protected function casts() : array
+    {
+        return [
+            'payment_transaction_id' => 'integer',
+            'amount' => 'decimal:2',
+            'issued_at' => 'datetime',
+        ];
+    }
+
     public function paymentTransaction() : BelongsTo { return $this->belongsTo(PaymentTransaction::class); }
 }

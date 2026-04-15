@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Domain\Programs\Enums\ProgramShowcaseStatus;
+use App\Domain\Programs\Enums\ProgramShowcaseType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProgramShowcase extends Model
@@ -23,6 +24,19 @@ class ProgramShowcase extends Model
         'is_featured',
         'status',
     ];
+
+    protected function casts() : array
+    {
+        return [
+            'program_id' => 'integer',
+            'media_id' => 'integer',
+            'thumbnail_media_id' => 'integer',
+            'position' => 'integer',
+            'is_featured' => 'boolean',
+            'type' => ProgramShowcaseType::class,
+            'status' => ProgramShowcaseStatus::class,
+        ];
+    }
 
     public function program() : BelongsTo { return $this->belongsTo(Program::class); }
     public function media() : BelongsTo { return $this->belongsTo(Media::class); }
