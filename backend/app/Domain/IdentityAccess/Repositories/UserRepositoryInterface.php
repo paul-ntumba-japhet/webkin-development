@@ -3,7 +3,7 @@
 namespace App\Domain\IdentityAccess\Repositories;
 
 use App\Models\User;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface UserRepositoryInterface
 {
