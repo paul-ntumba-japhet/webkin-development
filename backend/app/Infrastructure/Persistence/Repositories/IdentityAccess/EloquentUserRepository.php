@@ -20,7 +20,10 @@ final class EloquentUserRepository implements UserRepositoryInterface
     }
     public function paginateBackoffice(int $perPage = 20): LengthAwarePaginator
     {
-        return User::query()->latest('id')->paginate($perPage);
+        return User::query()
+            ->with('roles')
+            ->latest('id')
+            ->paginate($perPage);
     }
     public function create(array $attributes): User
     {

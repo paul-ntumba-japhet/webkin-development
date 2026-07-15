@@ -13,6 +13,7 @@ final class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(\App\Domain\IdentityAccess\Repositories\UserRepositoryInterface::class, \App\Infrastructure\Persistence\Repositories\IdentityAccess\EloquentUserRepository::class);
         $this->app->bind(\App\Domain\IdentityAccess\Repositories\RoleRepositoryInterface::class, \App\Infrastructure\Persistence\Repositories\IdentityAccess\EloquentRoleRepository::class);
+        $this->app->bind(\App\Domain\IdentityAccess\Repositories\PermissionRepositoryInterface::class, \App\Infrastructure\Persistence\Repositories\IdentityAccess\EloquentPermissionRepository::class);
         $this->app->bind(\App\Domain\Programs\Repositories\ProgramRepositoryInterface::class, \App\Infrastructure\Persistence\Repositories\Programs\EloquentProgramRepository::class);
         $this->app->bind(\App\Domain\Programs\Repositories\ProgramModuleRepositoryInterface::class, \App\Infrastructure\Persistence\Repositories\Programs\EloquentProgramModuleRepository::class);
         $this->app->bind(\App\Domain\Programs\Repositories\ProgramShowcaseRepositoryInterface::class, \App\Infrastructure\Persistence\Repositories\Programs\EloquentProgramShowcaseRepository::class);

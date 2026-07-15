@@ -2,22 +2,23 @@
 
 namespace App\Application\IdentityAccess\DTOs;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 final readonly class AssignRolesToUserData
 {
     /**
-     * @param array<int> $roleIds
+     * @param  array<int>  $roleIds
      */
     public function __construct(
         public int $userId,
         public array $roleIds,
     ) {}
 
-    public static function fromRequest(Request $request): self
+    public static function fromRequest(Request $request, User $user): self
     {
         return new self(
-            userId: (int) $request->input('user_id'),
+            userId: $user->id,
             roleIds: array_values(array_unique(array_map('intval', (array) $request->input('role_ids', [])))),
         );
     }

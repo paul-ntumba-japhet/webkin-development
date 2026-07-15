@@ -10,6 +10,7 @@ final readonly class ResetPasswordData
         public string $email,
         public string $token,
         public string $password,
+        public string $passwordConfirmation,
     ) {}
 
     public static function fromRequest(Request $request): self
@@ -18,6 +19,7 @@ final readonly class ResetPasswordData
             email: strtolower($request->string('email')->toString()),
             token: $request->string('token')->toString(),
             password: $request->string('password')->toString(),
+            passwordConfirmation: $request->string('password_confirmation')->toString(),
         );
     }
 
@@ -27,6 +29,7 @@ final readonly class ResetPasswordData
             'email' => $this->email,
             'token' => $this->token,
             'password' => $this->password,
+            'password_confirmation' => $this->passwordConfirmation,
         ];
     }
 }

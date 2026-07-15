@@ -3,6 +3,7 @@
 namespace App\Application\IdentityAccess\DTOs;
 
 use App\Domain\Users\Enums\UserStatus;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 final readonly class UpdateUserStatusData
@@ -12,10 +13,10 @@ final readonly class UpdateUserStatusData
         public UserStatus $status,
     ) {}
 
-    public static function fromRequest(Request $request): self
+    public static function fromRequest(Request $request, User $user): self
     {
         return new self(
-            userId: (int) $request->input('user_id'),
+            userId: $user->id,
             status: UserStatus::from($request->input('status')),
         );
     }

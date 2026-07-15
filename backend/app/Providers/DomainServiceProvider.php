@@ -10,6 +10,7 @@ final class DomainServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(\App\Domain\IdentityAccess\Services\PasswordHasherServiceInterface::class, \App\Domain\IdentityAccess\Services\BcryptPasswordHasher::class);
+        $this->app->bind(\App\Domain\IdentityAccess\Services\PermissionResolverInterface::class, \App\Domain\IdentityAccess\Services\DefaultPermissionResolver::class);
         $this->app->bind(\App\Domain\IdentityAccess\Services\RoleAssignmentServiceInterface::class, \App\Domain\IdentityAccess\Services\DefaultRoleAssignmentService::class);
         $this->app->bind(\App\Domain\Programs\Services\ProgramPublishingPolicyServiceInterface::class, \App\Domain\Programs\Services\DefaultProgramPublishingPolicyService::class);
         $this->app->bind(\App\Domain\Programs\Services\ProgramCatalogServiceInterface::class, \App\Domain\Programs\Services\DefaultProgramCatalogService::class);

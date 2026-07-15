@@ -3,11 +3,13 @@
 namespace App\Application\IdentityAccess\DTOs;
 
 use App\Domain\Users\Enums\UserStatus;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 final readonly class UpdateUserData
 {
     public function __construct(
+        public int $userId,
         public ?string $firstName = null,
         public ?string $lastName = null,
         public ?string $email = null,
@@ -20,9 +22,10 @@ final readonly class UpdateUserData
         public ?string $emailVerifiedAt = null,
     ) {}
 
-    public static function fromRequest(Request $request): self
+    public static function fromRequest(Request $request, User $user): self
     {
         return new self(
+            userId: $user->id,
             firstName: $request->filled('first_name') ? $request->string('first_name')->toString() : null,
             lastName: $request->filled('last_name') ? $request->string('last_name')->toString() : null,
             email: $request->filled('email') ? strtolower($request->string('email')->toString()) : null,

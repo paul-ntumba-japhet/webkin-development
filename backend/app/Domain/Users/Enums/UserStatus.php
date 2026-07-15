@@ -23,5 +23,20 @@ enum UserStatus: string
     {
         return array_column(self::cases(), 'value');
     }
+
+    public function allowsAuthentication(): bool
+    {
+        return $this === self::ACTIVE;
+    }
+
+    public function authenticationBlockedMessage(): string
+    {
+        return match ($this) {
+            self::SUSPENDED => __('auth.account_suspended'),
+            self::INACTIVE => __('auth.account_inactive'),
+            self::DELETED => __('auth.account_deleted'),
+            self::ACTIVE => __('auth.account_disabled'),
+        };
+    }
 }
 
